@@ -1,5 +1,6 @@
 import User from '../models/user.model';
-
+import WalletCtrl from './wallet.controller';
+// import Wallet from
 /**
  * Load user and append to req.
  */
@@ -33,7 +34,24 @@ function create(req, res, next) {
   });
 
   user.save()
-    .then(savedUser => res.json(savedUser))
+    .then(savedUser => {
+      // res.json(savedUser);
+      WalletCtrl.createWallet(savedUser)
+        .then(wallet => {
+          res.json({
+            user: savedUser,
+            'wallet': wallet
+          });
+        })
+        .catch(err => {
+          savedUser.remove()
+            .then(deletedUser => {
+              next(deletedUser);
+            })
+            .catch(e => next(e));
+          next(e);
+        });
+    })
     .catch(e => next(e));
 }
 

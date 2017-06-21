@@ -21,4 +21,9 @@ router.route('/random-shit')
     res.send("jasdjasjdajsdas");
   });
 
+router.route('/validateToken')
+  .get(authCtrl.isAuthenticatedJWT, (req, res, next) => {
+    res.send("validated");
+  });
+
 export default router;

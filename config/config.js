@@ -18,6 +18,8 @@ const envVarsSchema = Joi.object({
       }),
     JWT_SECRET: Joi.string().required()
       .description('JWT Secret required to sign'),
+    JWT_ISSUER: Joi.string().required()
+      .description('JWT issuer required to sign'),
     PASSWORD_SALT_FACTOR: Joi.number()
       .default(10),
     MONGO_HOST: Joi.string().required()
@@ -37,6 +39,7 @@ const config = {
   port: envVars.PORT,
   mongooseDebug: envVars.MONGOOSE_DEBUG,
   jwtSecret: envVars.JWT_SECRET,
+  jwtIssuer: envVars.JWT_ISSUER,
   passwordSaltFactor: envVars.PASSWORD_SALT_FACTOR,
   mongo: {
     host: envVars.MONGO_HOST,

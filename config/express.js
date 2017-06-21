@@ -14,6 +14,7 @@ import routes from '../server/routes/index.route';
 import config from './config';
 import APIError from '../server/helpers/APIError';
 import session from 'express-session';
+import path from 'path';
 
 const app = express();
 
@@ -21,15 +22,19 @@ if (config.env === 'development') {
   app.use(logger('dev'));
 }
 
+// view engine
+app.set('views', './server/views');
+app.set('view engine', 'ejs');
+
 // parse body params and attache them to req.body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(session({
-  secret: 'Super Secret Session Key',
-  saveUninitialized: true,
-  resave: true
-}));
+// app.use(session({
+//   secret: 'Super Secret Session Key',
+//   saveUninitialized: true,
+//   resave: true
+// }));
 
 app.use(cookieParser());
 app.use(compress());

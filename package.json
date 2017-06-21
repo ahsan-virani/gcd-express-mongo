@@ -42,6 +42,7 @@
   ],
   "dependencies": {
     "bcrypt": "1.0.2",
+    "bitcoin-core": "^1.2.0",
     "bluebird": "3.4.6",
     "body-parser": "1.15.2",
     "compression": "1.6.2",
@@ -49,10 +50,11 @@
     "cors": "2.8.1",
     "debug": "^2.4.5",
     "dotenv": "^4.0.0",
+    "ejs": "^2.5.6",
     "express": "4.14.0",
     "express-jwt": "5.1.0",
     "express-session": "^1.15.3",
-    "express-validation": "1.0.1",
+    "express-validation": "1.0.2",
     "express-winston": "2.1.2",
     "helmet": "3.1.0",
     "http-status": "^0.2.0",
@@ -61,6 +63,12 @@
     "method-override": "^2.3.5",
     "mongoose": "4.7.4",
     "morgan": "1.7.0",
+    "oauth2orize": "^1.8.0",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0",
     "winston": "2.3.0"
   },
   "devDependencies": {
