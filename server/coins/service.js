@@ -1,98 +1,59 @@
-import Client from 'bitcoin-core';
-import config from '../../config/config';
+import BtcService from './btc';
+import { BTC_TYPE } from '../constants';
 
-const client = new Client({
-  username: 'virani',
-  password: 'Axact123',
-  network: 'regtest'
-});
+const CoinService = {
+	GetInfo(coinType) {
+		switch (coinType) {
+		case BTC_TYPE:
+			return BtcService.GetInfo();
+			break;
+		default:
+			return BtcService.GetInfo();
+		}
+	},
 
-const altClient = new Client({
-  username: 'virani',
-  password: 'Axact123',
-  network: 'regtest',
-  port: 8501
-});
+	GetNewAddress(coinType, altNode) {
+		switch (coinType) {
+		case BTC_TYPE:
+			return BtcService.GetNewAddress(altNode);
+			break;
+		default:
+			return BtcService.GetNewAddress(altNode);
+		}
+	},
 
+	SendToAddress(coinType, address, amount, comment, toComment, altNode) {
+		switch (coinType) {
+		case BTC_TYPE:
+			return BtcService.SendToAddress(coinType, address, amount, comment, toComment, altNode);
+			break;
+		default:
+			return BtcService.SendToAddress(coinType, address, amount, comment, toComment, altNode);
+		}
 
-console.log('btc client created');
+	},
 
-// export default GetInfo = () => client.getInfo()
-// .then(([body, headers]) => console.log(body, headers));
+	generateBlocks(coinType, numBlocks, altNode) {
 
-function generateBlocks(numBlocks) {
-  return client.generate(numBlocks)
-    .then((result) => {
-      console.log('client.generate done', result);
-      return altClient.generate(numBlocks)
-        .then((res) => {
-          console.log('altClient.generate done', res);
-        })
-        .catch((e) => {
-          console.error('generate blocks altClient.generate error', e);
-        });
-    })
-    .catch((error) => { console.error('generate blocks client.generate error', error); });
+		switch (coinType) {
+		case BTC_TYPE:
+			return BtcService.generateBlocks(numBlocks, altNode);
+			break;
+		default:
+			return BtcService.generateBlocks(numBlocks, altNode);
+		}
 
-}
+	},
 
-// setInterval(() => { generateBlocks(1); }, 10000);
-
-const BtcService = {
-  GetInfo() {
-    return client.getInfo();
-  },
-  GetNewAddress(altNode) {
-    if (altNode === true) {
-      return altClient.getNewAddress();
-    }
-    return client.getNewAddress();
-  },
-
-  SendToAddress(address, amount, comment, toComment, altNode) {
-    console.log('send to address called SERVICE');
-    console.log('address', address);
-    console.log('amount', amount);
-    console.log('comment', comment);
-    console.log('toComment', toComment);
-    console.log('altNode', altNode);
-    if (altNode === true) {
-      console.log('send to address called SERVICE');
-      console.log('address', address);
-      console.log('amount', amount);
-      console.log('comment', comment);
-      console.log('toComment', toComment);
-      console.log('altNode', altNode);
-      return altClient.sendToAddress(address, amount, comment, toComment);
-    }
-    return client.sendToAddress(address, amount, comment, toComment);
-
-  },
-
-  generateBlocks(numBlocks, altNode) {
-    return client.generate(numBlocks)
-      .then((result) => {
-        console.log('client.generate done', result);
-        if (altNode !== true) {
-          return Promise.resolve(result);
-        }
-        return altClient.generate(numBlocks)
-          .then((res) => {
-            console.log('altClient.generate done', res);
-          })
-          .catch((e) => {
-            console.error('generate blocks altClient.generate error', e);
-          });
-      })
-      .catch((error) => { console.error('generate blocks client.generate error', error); });
-
-  },
-
-  listReceivedByAddress(confirmations = 2, altNode = false) {
-    if (altNode === true)
-      return altClient.listReceivedByAddress(confirmations);
-    return client.listReceivedByAddress(confirmations);
-  },
+	listReceivedByAddress(coinType, confirmations = 2, altNode = false) {
+		switch (coinType) {
+		case BTC_TYPE:
+			return BtcService.listReceivedByAddress(confirmations, altNode);
+			break;
+		default:
+			return BtcService.listReceivedByAddress(confirmations, altNode);
+		}
+	},
 };
 
-export default BtcService;
+export default CoinService;
