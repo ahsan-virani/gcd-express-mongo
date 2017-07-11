@@ -12,7 +12,7 @@ const CoinService = {
 		}
 	},
 
-	GetNewAddress(coinType, altNode) {
+	GetNewAddress(coinType, altNode = false) {
 		switch (coinType) {
 		case BTC_TYPE:
 			return BtcService.GetNewAddress(altNode);
