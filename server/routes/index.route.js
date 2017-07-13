@@ -8,6 +8,7 @@ import expressJwt from 'express-jwt';
 import config from '../../config/config';
 var passport = require('passport');
 
+
 const router = express.Router(); // eslint-disable-line new-cap
 
 router.use(passport.initialize());
@@ -15,7 +16,7 @@ router.use(passport.initialize());
 
 /** GET /health-check - Check service health */
 router.get('/health-check', (req, res) =>
-  res.send('OK')
+	res.send('OK')
 );
 
 // mount user routes at /users
