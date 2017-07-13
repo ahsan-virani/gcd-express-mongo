@@ -65,29 +65,11 @@ function sendCoinsToAddress(req, res, next) {
 function generateAddress(req, res, next) {
 	const coinType = req.body.coinType;
 
-	return Wallet.getAddress(req.user._id, coinType)
-		.then((address) => {
-			res.json({
-				address,
-				coinType,
-			});
+	WalletService.generateAddress(req.user._id, coinType)
+		.then((data) => {
+			res.json(data);
 		})
-		.catch((e) => {
-			return BtcService.GetNewAddress()
-				.then((address) => {
-					return addAddress(req.user._id, coinType, address)
-						.then((addAddr) => {
-							return res.json({
-								address,
-								coinType,
-							});
-						})
-						.catch((err) => {
-							next(err);
-						});
-				})
-				.catch(error => next(error));
-		});
+		.catch(err => next(err));
 }
 
 function generateAccount(req, res, next) {

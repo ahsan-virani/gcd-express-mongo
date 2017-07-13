@@ -78,6 +78,34 @@ const WalletService = {
 		// move remove from reserved to withdarwn
 		// Wallet.
 
+	},
+	getBalance(userId, coinType) {
+
+	},
+	generateAddress(userId, coinType) {
+		return Wallet.getAddress(userId, coinType)
+			.then((address) => {
+				return Promise.resolve({
+					address,
+					coinType,
+				});
+			})
+			.catch((e) => {
+				return CoinService.GetNewAddress()
+					.then((address) => {
+						return addAddress(userId, coinType, address)
+							.then((addAddr) => {
+								return res.json({
+									address,
+									coinType,
+								});
+							})
+							.catch((err) => {
+								return Promise.reject(err);
+							});
+					})
+					.catch(error => Promise.reject(error));
+			});
 	}
 
 };

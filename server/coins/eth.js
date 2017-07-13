@@ -14,7 +14,7 @@ const EthService = {
 	GetNewAccount(altNode) {
 
 		console.log('hammad');
-		return Promise.resolve(web3.version.network);
+		return Promise.resolve(web3.eth.getBalance("9ecff0da15f769bd3e89648153751359efe70139"));
 		// return new Promise(function(resolve, reject) {
 
 		// var version = web3.version.api;
@@ -22,6 +22,14 @@ const EthService = {
 
 		// });
 
+	},
+
+	getBalance(accountId) {
+		return Promise.resolve(web3.eth.getBalance(accountId));
+	},
+
+	sendTransaction(fromAccount, toAccount, amount) {
+		return 0;
 	},
 
 };
