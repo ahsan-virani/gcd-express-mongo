@@ -255,9 +255,9 @@ function updateAllBalances() {
 // var
 
 function cronJob() {
-  return CoinService.generateBlocks(2)
+  return CoinService.generateBlocks(BTC_TYPE, 2)
     .then(() => {
-      return CoinService.generateBlocks(2, true);
+      return CoinService.generateBlocks(BTC_TYPE, 2, true);
     })
     .then(() => {
       return updateAllBalances()
