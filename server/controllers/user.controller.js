@@ -36,7 +36,7 @@ function create(req, res, next) {
   user.save()
     .then(savedUser => {
       // res.json(savedUser);
-      WalletCtrl.createWallet(savedUser)
+      WalletCtrl.createWallet(savedUser, req.body.etherAccount)
         .then(wallet => {
           res.json({
             user: savedUser,

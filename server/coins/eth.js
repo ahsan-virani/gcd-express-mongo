@@ -11,28 +11,33 @@ console.log('eth client created');
 
 const EthService = {
 
-	GetNewAccount(altNode) {
+  GetNewAccount(altNode) {
 
-		console.log('GetNewAccount');
-		return Promise.resolve(web3.eth.version);
-		// return new Promise(function(resolve, reject) {
+    console.log('GetNewAccount');
+    return Promise.resolve(web3.eth.version);
+    // return new Promise(function(resolve, reject) {
 
-		// var version = web3.version.api;
-		// return resolve version; // "0.2.0"
+    // var version = web3.version.api;
+    // return resolve version; // "0.2.0"
 
-		// });
+    // });
 
-	},
+  },
 
-	getBalance(accountId) {
-		return Promise.resolve(web3.eth.getBalance(accountId));
-	},
+  getBalance(accountId) {
+    return Promise.resolve(web3.eth.getBalance(accountId));
+  },
 
-	sendTransaction(senderAccount, receiverAccount, amount) {
-		var finalAmount = web3.toWei(amount, "ether");
-		web3.personal.unlockAccount(senderAccount, "123456")
-		return Promise.resolve(web3.eth.sendTransaction({ from: senderAccount, to: receiverAccount, value: finalAmount }));
-	},
+  sendTransaction(senderAccount, receiverAccount, amount) {
+    console.log("Ether send transaction");
+    console.log('senderAccount', senderAccount);
+    console.log('receiverAccount', receiverAccount);
+    console.log('amount', amount);
+
+    var finalAmount = web3.toWei(amount, "ether");
+    web3.personal.unlockAccount(senderAccount, "123456");
+    return Promise.resolve(web3.eth.sendTransaction({ from: senderAccount, to: receiverAccount, value: finalAmount }));
+  },
 
 };
 
