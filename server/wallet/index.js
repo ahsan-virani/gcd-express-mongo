@@ -92,9 +92,9 @@ const WalletService = {
       .catch((e) => {
         return CoinService.GetNewAddress()
           .then((address) => {
-            return addAddress(userId, coinType, address)
+            return this.addAddress(userId, coinType, address)
               .then((addAddr) => {
-                return res.json({
+                return Promise.resolve({
                   address,
                   coinType,
                 });
