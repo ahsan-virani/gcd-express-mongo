@@ -79,9 +79,7 @@ const WalletService = {
 		// Wallet.
 
 	},
-	getBalance(userId, coinType) {
 
-	},
 	generateAddress(userId, coinType) {
 		return Wallet.getAddress(userId, coinType)
 			.then((address) => {
@@ -106,7 +104,30 @@ const WalletService = {
 					})
 					.catch(error => Promise.reject(error));
 			});
-	}
+	},
+
+	getBalance(userId, coinType) {
+
+		const accountId = "0xcbb9153ae146fd691ee7d5347f4c83d1d40d0e8b";
+		return CoinService.getBalance(accountId, coinType)
+			.then((balance) => {
+				return balance;
+			})
+			.catch(error => Promise.reject(error));
+
+	},
+
+	sendEther(userId, coinType, senderAccount, receiverAccount, amount) {
+
+		const accountId = "0xcbb9153ae146fd691ee7d5347f4c83d1d40d0e8b";
+		return CoinService.sendEther(coinType, senderAccount, receiverAccount, amount)
+			.then((balance) => {
+				return balance;
+			})
+			.catch(error => Promise.reject(error));
+
+	},
+
 
 };
 

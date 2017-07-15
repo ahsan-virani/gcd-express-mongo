@@ -43,7 +43,6 @@ function sendCoinsToAddress(req, res, next) {
 			});
 		})
 		.catch((error) => {
-			console.log('BtcService.SendToAddress failed: ', error);
 			return next(error);
 		});
 
@@ -72,16 +71,21 @@ function generateAddress(req, res, next) {
 		.catch(err => next(err));
 }
 
-function generateAccount(req, res, next) {
-	const coinType = 'ETH';
 
-	return BtcService.GetNewAddress(coinType)
-		.then((address) => {
+function generateAccount(req, res, next) {
+	const userId = 1;
+	const coinType = req.body.coinType;
+	const senderAccount = req.body.senderAccount;
+	const receiverAccount = req.body.receiverAccount;
+	const amount = req.body.amount;
+	//return res.json(req.body.senderAccount);
+	WalletService.sendEther(userId, coinType, senderAccount, receiverAccount, amount)
+		.then((data) => {
 			res.json({
-				address,
+				data
 			});
 		})
-		.catch(error => next(error));
+		.catch(err => next(err));
 }
 
 function addAddress(userId, coinType, address) {

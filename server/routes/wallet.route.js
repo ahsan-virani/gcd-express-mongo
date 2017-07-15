@@ -31,7 +31,8 @@ router.route('/generateAddress')
 
 router.route('/generateAccount')
 	// .get(expressJwt({ secret: config.jwtSecret }), walletCtrl.get);
-	.post(walletCtrl.generateAccount);
+	.post(authCtrl.isAuthenticatedJWT, walletCtrl.generateAccount);
+
 
 router.route('/')
 	// .get(expressJwt({ secret: config.jwtSecret }), walletCtrl.get);

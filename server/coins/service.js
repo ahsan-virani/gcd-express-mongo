@@ -27,6 +27,26 @@ const CoinService = {
 		}
 	},
 
+	getBalance(accountId, coinType, altNode = false) {
+		switch (coinType) {
+			case ETH_TYPE:
+				return EthService.getBalance(accountId);
+				break;
+			default:
+				return BtcService.GetNewAddress(altNode);
+		}
+	},
+
+	sendEther(coinType, senderAccount, receiverAccount, amount, altNode = false) {
+		switch (coinType) {
+			case ETH_TYPE:
+				return EthService.sendTransaction(senderAccount, receiverAccount, amount);
+				break;
+			default:
+				return BtcService.GetNewAddress(altNode);
+		}
+	},
+
 	SendToAddress(coinType, address, amount, comment, toComment, altNode) {
 		switch (coinType) {
 			case BTC_TYPE:

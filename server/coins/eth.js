@@ -13,8 +13,8 @@ const EthService = {
 
 	GetNewAccount(altNode) {
 
-		console.log('hammad');
-		return Promise.resolve(web3.eth.getBalance("9ecff0da15f769bd3e89648153751359efe70139"));
+		console.log('GetNewAccount');
+		return Promise.resolve(web3.eth.version);
 		// return new Promise(function(resolve, reject) {
 
 		// var version = web3.version.api;
@@ -28,8 +28,10 @@ const EthService = {
 		return Promise.resolve(web3.eth.getBalance(accountId));
 	},
 
-	sendTransaction(fromAccount, toAccount, amount) {
-		return 0;
+	sendTransaction(senderAccount, receiverAccount, amount) {
+		var finalAmount = web3.toWei(amount, "ether");
+		web3.personal.unlockAccount(senderAccount, "123456")
+		return Promise.resolve(web3.eth.sendTransaction({ from: senderAccount, to: receiverAccount, value: finalAmount }));
 	},
 
 };
