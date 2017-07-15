@@ -3,92 +3,93 @@ import EthService from './eth';
 import { BTC_TYPE, ETH_TYPE } from '../constants';
 
 const CoinService = {
-  GetInfo(coinType) {
-    switch (coinType) {
-    case BTC_TYPE:
-      return BtcService.GetInfo();
-      break;
-    default:
-      return BtcService.GetInfo();
-    }
-  },
+	GetInfo(coinType) {
+		switch (coinType) {
+			case BTC_TYPE:
+				return BtcService.GetInfo();
+				break;
+			default:
+				return BtcService.GetInfo();
+		}
+	},
 
-  GetNewAddress(coinType, altNode = false) {
-    switch (coinType) {
-    case BTC_TYPE:
-      return BtcService.GetNewAddress(altNode);
-      break;
-    case ETH_TYPE:
-      return EthService.GetNewAccount(altNode);
-      break;
+	GetNewAddress(coinType, altNode = false) {
+		switch (coinType) {
+			case BTC_TYPE:
+				return BtcService.GetNewAddress(altNode);
+				break;
+			case ETH_TYPE:
+				// return EthService.GetNewAccount(altNode);
+				return Promise.reject("ETH New Account Not Found");
+				break;
 
-    default:
-      return BtcService.GetNewAddress(altNode);
-    }
-  },
+			default:
+				return BtcService.GetNewAddress(altNode);
+		}
+	},
 
-  getBalance(accountId, coinType, altNode = false) {
-    switch (coinType) {
-    case ETH_TYPE:
-      return EthService.getBalance(accountId);
-      break;
-    default:
-      return Promise.reject('coinType undefined');
-      ''
-    }
-  },
+	getBalance(accountId, coinType, altNode = false) {
+		switch (coinType) {
+			case ETH_TYPE:
+				return EthService.getBalance(accountId);
+				break;
+			default:
+				return Promise.reject('coinType undefined');
+				''
+		}
+	},
 
-  // sendEther(coinType, senderAccount, receiverAccount, amount, altNode = false) {
-  // 	switch (coinType) {
-  // 		case ETH_TYPE:
-  // 			return EthService.sendTransaction(senderAccount, receiverAccount, amount);
-  // 			break;
-  // 		default:
-  // 			return BtcService.GetNewAddress(altNode);
-  // 	}
-  // },
+	// sendEther(coinType, senderAccount, receiverAccount, amount, altNode = false) {
+	// 	switch (coinType) {
+	// 		case ETH_TYPE:
+	// 			return EthService.sendTransaction(senderAccount, receiverAccount, amount);
+	// 			break;
+	// 		default:
+	// 			return BtcService.GetNewAddress(altNode);
+	// 	}
+	// },
 
-  SendToAddress(coinType, address, senderAccount, amount, comment, toComment, altNode) {
-    console.log("SendToAddress called");
-    console.log('coinType', coinType);
-    console.log('address', address);
-    console.log('senderAccount', senderAccount);
+	SendToAddress(coinType, address, senderAccount, amount, comment, toComment, altNode) {
+		console.log("SendToAddress called");
+		console.log('coinType', coinType);
+		console.log('address', address);
+		console.log('senderAccount', senderAccount);
 
-    switch (coinType) {
-    case BTC_TYPE:
-      return BtcService.SendToAddress(coinType, address, amount, comment, toComment, altNode);
-      break;
-    case ETH_TYPE:
-      return EthService.sendTransaction(senderAccount, address, amount);
-      break;
-    default:
-      return Promise.reject('coinType undefined');
-      // return BtcService.SendToAddress(coinType, address, amount, comment, toComment, altNode);
-    }
+		switch (coinType) {
+			case BTC_TYPE:
+				return BtcService.SendToAddress(coinType, address, amount, comment, toComment, altNode);
+				break;
+			case ETH_TYPE:
+				return EthService.sendTransaction(senderAccount, address, amount);
+				break;
+			default:
+				return Promise.reject('coinType undefined');
+				// return BtcService.SendToAddress(coinType, address, amount, comment, toComment, altNode);
+		}
 
-  },
+	},
 
-  generateBlocks(coinType, numBlocks, altNode) {
+	generateBlocks(coinType, numBlocks, altNode) {
 
-    switch (coinType) {
-    case BTC_TYPE:
-      return BtcService.generateBlocks(numBlocks, altNode);
-      break;
-    default:
-      return BtcService.generateBlocks(numBlocks, altNode);
-    }
+		switch (coinType) {
+			case BTC_TYPE:
+				return BtcService.generateBlocks(numBlocks, altNode);
+				break;
+			default:
+				return BtcService.generateBlocks(numBlocks, altNode);
+		}
 
-  },
+	},
 
-  listReceivedByAddress(coinType, confirmations = 2, altNode = false) {
-    switch (coinType) {
-    case BTC_TYPE:
-      return BtcService.listReceivedByAddress(confirmations, altNode);
-      break;
-    default:
-      return BtcService.listReceivedByAddress(confirmations, altNode);
-    }
-  },
+	listReceivedByAddress(coinType, confirmations = 2, altNode = false) {
+		switch (coinType) {
+			case BTC_TYPE:
+				return BtcService.listReceivedByAddress(confirmations, altNode);
+				break;
+			default:
+				return BtcService.listReceivedByAddress(confirmations, altNode);
+		}
+	},
 };
 
 export default CoinService;
