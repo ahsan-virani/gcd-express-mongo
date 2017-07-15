@@ -25,6 +25,7 @@ const WalletService = {
 
     return Wallet.getByUserId(userId)
       .then((wallet) => {
+        console.log('WALLET: CHECK HERE: ', wallet);
         let coin = wallet.coins.find((c) => c.coinType === coinType);
         console.log('coin is available', coin);
         console.log('address:', address);
