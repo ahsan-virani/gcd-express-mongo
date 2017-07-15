@@ -107,6 +107,21 @@ const WalletService = {
       });
   },
 
+
+  addAddress(userId, coinType, address) {
+    return Wallet.getByUserId(userId)
+      .then((wallet) => {
+        const coin = wallet.coins.find(c => c.coinType === coinType);
+        const newCoinAddress = new CoinAddress({ address });
+        return newCoinAddress.save()
+          .then(() => {
+            coin.addresses.push(newCoinAddress);
+            // newCoinAddress.save()
+            return wallet.save();
+          });
+      });
+  },
+
   getBalance(userId, coinType) {
 
     const accountId = "0xcbb9153ae146fd691ee7d5347f4c83d1d40d0e8b";

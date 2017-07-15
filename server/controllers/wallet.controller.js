@@ -89,19 +89,6 @@ function generateAccount(req, res, next) {
     .catch(err => next(err));
 }
 
-function addAddress(userId, coinType, address) {
-  return Wallet.getByUserId(userId)
-    .then((wallet) => {
-      const coin = wallet.coins.find(c => c.coinType === coinType);
-      const newCoinAddress = new CoinAddress({ address });
-      return newCoinAddress.save()
-        .then(() => {
-          coin.addresses.push(newCoinAddress);
-          // newCoinAddress.save()
-          return wallet.save();
-        });
-    });
-}
 
 function createWallet(user, etherAccount) {
   const wallet = new Wallet({
